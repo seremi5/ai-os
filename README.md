@@ -1,4 +1,4 @@
-# ai-forge
+# sr-pipeline
 
 Standards, patterns, and templates I use to build AI pipelines. Every project I ship follows these conventions — and any agent building a new pipeline in my style should start here.
 
