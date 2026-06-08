@@ -1,0 +1,7 @@
+# AI OS runtime logs (audit job)
+audits/.last-run.log
+audits/.launchd.out.log
+audits/.launchd.err.log
+audits/*.tmp
+
+.DS_Store

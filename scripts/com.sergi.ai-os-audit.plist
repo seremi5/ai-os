@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  AI OS — Weekly OS Audit launch agent.
+  Runs every Monday at 08:00 local time.
+
+  Install:
+    cp ~/GitHub/ai-os/scripts/com.sergi.ai-os-audit.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.sergi.ai-os-audit.plist
+
+  Run once now (test):
+    launchctl kickstart -k gui/$(id -u)/com.sergi.ai-os-audit
+
+  Uninstall:
+    launchctl bootout gui/$(id -u)/com.sergi.ai-os-audit
+    rm ~/Library/LaunchAgents/com.sergi.ai-os-audit.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sergi.ai-os-audit</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/sergireina/GitHub/ai-os/scripts/run-audit.sh</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>1</integer>
+        <key>Hour</key>
+        <integer>8</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/sergireina/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>HOME</key>
+        <string>/Users/sergireina</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/sergireina/GitHub/ai-os/audits/.launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/sergireina/GitHub/ai-os/audits/.launchd.err.log</string>
+</dict>
+</plist>

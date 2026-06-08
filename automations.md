@@ -16,9 +16,9 @@ Digests · Monitors · Audits · Briefings · Reminders.
 | Weekday | Creator | LinkedIn — 3 post candidates in my voice | `/linkedin-daily` | 3 cards, sources verified |
 | Sunday 09:00 | Briefing | Portfolio Coordinator writes the week's decision | Coordinator | 1 decision page |
 | Monday (manual) | — | `/weekly-cycle` Mon→Fri | CEO (operator-run) | Not unattended |
-| **Weekly (set this)** | **Audit** | **Weekly OS Audit** of all 5 layers | me + [`audit.md`](audit.md) | **max 5 proposals/layer, 1 line each** |
+| **Mon 08:00** | **Audit** | **Weekly OS Audit** → `audits/<week>.md` + macOS notification | launchd → `scripts/run-audit.sh` | **max 5 proposals/layer, 1 line each** |
 
-> The OS audit is the keystone. It isn't scheduled yet — see "Wiring" below.
+> The OS audit is the keystone, and now fully automatic — see "How the OS Audit runs" below.
 
 ## Limits to remember
 
@@ -33,11 +33,12 @@ Digests · Monitors · Audits · Briefings · Reminders.
 | Output is tight, every line earns it | I can't remember what's scheduled |
 | Downstream work runs without me triggering | I trigger work the automation should do |
 
-## Wiring the OS Audit
+## How the OS Audit runs (fully automatic)
 
-Run it manually each Monday by pasting the prompt in [`audit.md`](audit.md), **or** schedule it:
+A macOS **launchd** agent runs headless `claude` against this repo every Monday 08:00, writes the report to `audits/<ISO-week>.md`, and fires a notification. You still approve/reject by hand — that's the point.
 
-- `/schedule` — a remote agent on a weekly cron (e.g. Monday 08:00 Madrid). Best for hands-off.
-- `/loop` — self-paced reminder loop within a live session.
+- **Runner:** [`scripts/run-audit.sh`](scripts/run-audit.sh) — `claude -p` with the prompt in [`scripts/audit-prompt.md`](scripts/audit-prompt.md), `--model sonnet`, capped at `--max-budget-usd 1`.
+- **Schedule:** [`scripts/com.sergi.ai-os-audit.plist`](scripts/com.sergi.ai-os-audit.plist) (install/uninstall commands are in the plist header).
+- **Why local, not a cloud cron:** a remote agent can't see local memory, chats, or MCP usage. This job runs on the Mac, so it can.
 
-⚠️ _TODO — pick one and set the day/time._
+Run it by hand any time: `bash scripts/run-audit.sh`. Test the schedule now: `launchctl kickstart -k gui/$(id -u)/com.sergi.ai-os-audit`.
