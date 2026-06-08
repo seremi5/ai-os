@@ -1,186 +1,78 @@
-# ai-forge
+# Sergi's AI OS
 
-Standards, patterns, and templates I use to build AI pipelines. Every project I ship follows these conventions — and any agent building a new pipeline in my style should start here.
+> Formerly `ai-forge` / `sr-pipeline`. The engineering standards didn't disappear — they're now one layer (`engineering/`) inside a larger system.
 
----
+A personal operating model for working with AI. Not a better model — a better setup. Five layers the agent reads so it knows who I am, what it can reach, what to reuse, what runs without me, and what to remember. One loop keeps it from rotting.
 
-## Philosophy
+Built once. Portable across tools (Claude, Codex, Cursor, whatever's next). The system decays the moment the loop stops running.
 
-- **Agents do one thing.** Each agent has a single responsibility and a single entry point: `run(...)`.
-- **Data flows forward only.** No agent reaches back to modify upstream state.
-- **Scoring is not AI.** Quantitative signals are computed deterministically before AI sees them. AI writes analysis, it does not decide scores.
-- **Fail fast, fail loudly.** Config is validated at startup. Missing keys produce a clear message in the target language and exit with code 1.
-- **Outputs are self-contained.** Reports are single HTML files with no external dependencies beyond CDN fonts.
+> **This is not an AI problem. It's an operating-model problem.** — adapted from the CraftMatters AI-OS masterclass (Ines Lourenço, 2026).
 
 ---
 
-## Pipeline Pattern
+## The five layers + one loop
 
-Every project follows the same 4-layer structure:
+| Layer | Purpose | File |
+|-------|---------|------|
+| **L1 · Context** | What the agent reads first | [`CLAUDE.md`](CLAUDE.md) (router) + [`context/`](context/) |
+| **L2 · Connections** | Reach beyond the workspace | [`connections.md`](connections.md) |
+| **L3 · Skills** | Prompts I reuse, not retype | [`skills/`](skills/) |
+| **L4 · Automations** | Work that runs while I sleep | [`automations.md`](automations.md) |
+| **L5 · Memory** | What survives every conversation | [`memory.md`](memory.md) → `~/.claude/.../memory/` |
+| **The loop** | Weekly OS Audit — the keystone | [`audit.md`](audit.md) |
 
-```
-CLI entry point  (analyze.py)
-    │
-    ├─ 1. Data layer     → src/services/
-    │       Typed wrappers around external APIs → dataclasses
-    │
-    ├─ 2. Scoring layer  → src/agents/scorer.py
-    │       Pure functions, no AI, reproducible
-    │
-    ├─ 3. Agent layer    → src/agents/
-    │       Multi-agent debate or sequential analysis
-    │
-    └─ 4. Output layer   → src/agents/report_builder.py
-            Self-contained HTML report
-```
+Plus the engineering layer this repo grew out of:
 
-Details: [patterns/pipeline.md](patterns/pipeline.md)
+| | | |
+|---|---|---|
+| **Engineering** | How I build AI pipelines (the old ai-forge) | [`engineering/`](engineering/) |
 
 ---
 
-## Multi-Agent Debate Pattern
+## How to use it
 
-For decisions that benefit from adversarial analysis:
-
-```
-BullAgent    → makes the strongest case FOR
-BearAgent    → makes the strongest case AGAINST
-SkepticAgent → challenges both cases, surfaces assumptions
-JudgeAgent   → synthesizes into a verdict with conviction level
-```
-
-No agent sees the others' outputs until their own is complete. The judge receives all three and produces the final synthesis. This prevents anchoring and groupthink.
-
-Details: [patterns/debate.md](patterns/debate.md)
-
----
-
-## Agent Contract
-
-Every agent module must:
-
-1. Export a single `run(...)` function as its public interface
-2. Accept typed inputs (dataclasses, not raw dicts)
-3. Return typed outputs
-4. Never write to disk or call external APIs directly — use services
-5. Log with the shared logger (`info` / `success` / `warn` / `error`)
-
-```python
-# Good
-def run(data: MarketData, config: ScorerConfig) -> ScoreResult:
-    ...
-
-# Bad — raw dict, side effects, direct API call
-def run(data: dict) -> dict:
-    response = requests.get(...)  # ← belongs in a service
-    open("output.json", "w")      # ← belongs in the output layer
-```
-
-Details: [standards/agent-contract.md](standards/agent-contract.md)
-
----
-
-## Config & Secrets
-
-- All secrets live in `.env` (always in `.gitignore`)
-- `.env.example` ships with the repo — no real values, safe to share
-- `src/config/env.py` validates all required keys at import time
-- Missing key → clear error message → `sys.exit(1)`
-
-```python
-# src/config/env.py pattern
-import os, sys
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if not GEMINI_API_KEY:
-    print("Error: GEMINI_API_KEY not set. Copy .env.example to .env and add your key.")
-    sys.exit(1)
-```
-
-Details: [standards/config.md](standards/config.md)
-
----
-
-## Error Handling
-
-- **User-facing errors**: human language, actionable message, `sys.exit(1)`
-- **Internal errors**: let them propagate — don't swallow exceptions silently
-- **External API failures**: retry with backoff in the service layer, not in agents
-- **No bare `except:`** — always catch the specific exception
-
----
-
-## Logging
-
-Use the shared logger from `src/utils/logger.py`. Five levels:
-
-| Method | When to use |
-|---|---|
-| `logger.step("Fetching data...")` | Starting a named phase |
-| `logger.info("Found 42 peers")` | Neutral information |
-| `logger.success("Report saved")` | Completed successfully |
-| `logger.warn("No insider data")` | Non-fatal, degraded output |
-| `logger.error("API key invalid")` | Fatal, about to exit |
-
-No `print()` in agents or services. No debug logging in production.
-
----
-
-## File Structure
-
-Every new project starts with this layout:
-
-```
-analyze.py              ← CLI entry point
-.env.example            ← key template
-.env                    ← secrets (gitignored)
-requirements.txt
-src/
-  config/
-    env.py              ← validates env vars at startup
-    constants.py        ← weights, thresholds, labels
-  services/
-    market_data.py      ← external API wrappers
-  agents/
-    data_fetcher.py     ← orchestrates data retrieval
-    scorer.py           ← quantitative scoring
-    analyst.py          ← AI analysis / debate orchestrator
-    report_builder.py   ← output generation
-  utils/
-    logger.py           ← colored terminal logger
-    formatters.py       ← display formatting helpers
-reports/                ← generated output (gitignored)
-```
-
-Template with stubs: [template/](template/)
-
----
-
-## Starting a New Project
-
-Clone this repo and copy the template:
+**Working *in* the OS** — open this repo in Claude Code. `CLAUDE.md` loads first and routes the agent to the right context file before it answers anything.
 
 ```bash
-cp -r template/ ../my-new-project
-cd ../my-new-project
-cp .env.example .env
-pip install -r requirements.txt
+cd ~/GitHub/ai-os
+claude
 ```
 
-Then implement each layer in order: services → scorer → agents → report builder.
+**Making the OS govern *every* session** — add one routing line to the global `~/.claude/CLAUDE.md` so it points here for product/startup/writing work. Then the voice and domain apply everywhere, not only in this repo. (Editing the global config needs your explicit OK — see Status.)
 
-Read [patterns/pipeline.md](patterns/pipeline.md) before writing any agent code.
+**Running the loop** — once a week, paste the audit from [`audit.md`](audit.md). Ten minutes. Approve 2–3 changes, reject 1–2, move on. Skip it and the OS rots.
 
 ---
 
-## Quality Checklist
+## Folder map
 
-Before declaring a pipeline complete:
+```
+ai-os/                       # the repo (was sr-pipeline / ai-forge)
+├── README.md                # this file
+├── CLAUDE.md                # L1 router — read first, ≤80 lines
+├── context/                 # L1 Context
+│   ├── profile.md           #   identity: voice, principles, role, banned phrases
+│   ├── strategy.md          #   this quarter's priorities (≤200 words)
+│   ├── domain.md            #   the area I own: fintech / AP·AR / e-invoicing
+│   └── terminology.md       #   guardrails: banned vocabulary
+├── connections.md           # L2 Connections inventory
+├── skills/                  # L3 Skills catalog
+│   └── README.md
+├── automations.md           # L4 Automations registry
+├── memory.md                # L5 — pointer to ~/.claude memory (not duplicated)
+├── audit.md                 # the Weekly OS Audit (the loop)
+└── engineering/             # how I build pipelines (the folded-in ai-forge)
+    ├── README.md
+    ├── standards/
+    ├── patterns/
+    └── template/
+```
 
-- [ ] `python analyze.py <TICKER> --no-browser` runs without errors
-- [ ] All outputs appear in the target language
-- [ ] No hardcoded values that should come from config
-- [ ] `.env` is not tracked by git (`git status` check)
-- [ ] Each agent has a single `run(...)` entry point
-- [ ] No agent calls external APIs directly — only through services
-- [ ] Report opens correctly in browser and all sections populate
+---
+
+## Status
+
+- ✅ Renamed `sr-pipeline → ai-os` (folder + GitHub `seremi5/ai-os`; old name redirects).
+- ✅ Weekly OS Audit scheduled — see [`automations.md`](automations.md). Outputs land in [`audits/`](audits/).
+- ⏳ Route the global `~/.claude/CLAUDE.md` into this OS — **needs your explicit OK** (it's the agent's own startup config).
+- ⚠️ Set the quarter's outcome metric in [`context/strategy.md`](context/strategy.md) — only you can.
