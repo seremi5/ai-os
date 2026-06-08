@@ -17,7 +17,7 @@
 ## The prompt — paste this once a week
 
 ```
-Run a Weekly OS Audit on my AI OS at ~/GitHub/ai-os, right now.
+Run a Weekly OS Audit on my AI OS at ~/GitHub/sr-os, right now.
 
 For each of the 5 layers, scan and report in this exact format:
 

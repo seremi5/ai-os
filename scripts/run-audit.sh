@@ -2,12 +2,12 @@
 #
 # Weekly OS Audit — fully automated.
 # Runs Claude headless against the OS, writes audits/<ISO-week>.md, and notifies.
-# Scheduled by launchd (see com.sergi.ai-os-audit.plist). Also runnable by hand:
-#     bash ~/GitHub/ai-os/scripts/run-audit.sh
+# Scheduled by launchd (see com.sergi.sr-os-audit.plist). Also runnable by hand:
+#     bash ~/GitHub/sr-os/scripts/run-audit.sh
 #
 set -euo pipefail
 
-REPO="$HOME/GitHub/ai-os"
+REPO="$HOME/GitHub/sr-os"
 CLAUDE="$(command -v claude || echo "$HOME/.local/bin/claude")"
 WEEK="$(date +%G-W%V)"
 TODAY="$(date '+%Y-%m-%d')"

@@ -1,4 +1,4 @@
-You are running the Weekly OS Audit on Sergi's AI OS. Your current directory is the repo root (`~/GitHub/ai-os`).
+You are running the Weekly OS Audit on Sergi's AI OS. Your current directory is the repo root (`~/GitHub/sr-os`).
 
 Read and assess each layer:
 

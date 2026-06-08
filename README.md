@@ -1,6 +1,6 @@
-# Sergi's AI OS
+# SR-OS
 
-> Formerly `ai-forge` / `sr-pipeline`. Two things merged here: the personal operating system (the five layers below) and the **PACT** framework, which is now the OS's engineering layer ([`engineering/pact/`](engineering/pact/)).
+> Sergi Reina's AI operating system. Formerly `ai-forge` / `sr-pipeline` / `ai-os`. Two things merged here: the personal operating system (the five layers below) and the **PACT** framework, which is now the OS's engineering layer ([`engineering/pact/`](engineering/pact/)).
 
 A personal operating model for working with AI. Not a better model — a better setup. Five layers the agent reads so it knows who I am, what it can reach, what to reuse, what runs without me, and what to remember. One loop keeps it from rotting.
 
@@ -37,15 +37,15 @@ How I build software with AI. Two toolkits, both in [`engineering/`](engineering
 **Working *in* the OS** — open this repo in Claude Code. `CLAUDE.md` loads first and routes the agent to the right context file before it answers anything.
 
 ```bash
-cd ~/GitHub/ai-os
+cd ~/GitHub/sr-os
 claude
 ```
 
 **Installing PACT into a project** — point Claude at the PACT subfolder:
 
 ```bash
-git clone https://github.com/seremi5/ai-os /tmp/ai-os
-claude "install the framework from /tmp/ai-os/engineering/pact into this project"
+git clone https://github.com/seremi5/sr-os /tmp/sr-os
+claude "install the framework from /tmp/sr-os/engineering/pact into this project"
 ```
 
 **Making the OS govern *every* session** — done: the global `~/.claude/CLAUDE.md` routes here for product/startup/writing work, so the voice and domain apply in every session, not only this repo.
@@ -57,7 +57,7 @@ claude "install the framework from /tmp/ai-os/engineering/pact into this project
 ## Folder map
 
 ```
-ai-os/                       # the repo (was sr-pipeline / ai-forge)
+sr-os/                       # the repo (was sr-pipeline / ai-forge)
 ├── README.md                # this file
 ├── CLAUDE.md                # L1 router — read first, ≤80 lines
 ├── context/                 # L1 Context (profile, strategy, domain, terminology)
@@ -79,7 +79,7 @@ ai-os/                       # the repo (was sr-pipeline / ai-forge)
 
 ## Status
 
-- ✅ Renamed `sr-pipeline → ai-os` (folder + GitHub `seremi5/ai-os`; old name redirects).
+- ✅ Renamed `sr-pipeline → sr-os` (folder + GitHub `seremi5/sr-os`; old name redirects).
 - ✅ PACT framework merged in as the engineering layer (`engineering/pact/`); nothing lost.
 - ✅ Global `~/.claude/CLAUDE.md` routes here for product/startup/writing work.
 - ✅ Weekly OS Audit is fully automatic — a macOS LaunchAgent runs headless `claude` every Monday 08:00 → `audits/<week>.md` + a notification. See [`automations.md`](automations.md).

@@ -38,7 +38,7 @@ Digests · Monitors · Audits · Briefings · Reminders.
 A macOS **launchd** agent runs headless `claude` against this repo every Monday 08:00, writes the report to `audits/<ISO-week>.md`, and fires a notification. You still approve/reject by hand — that's the point.
 
 - **Runner:** [`scripts/run-audit.sh`](scripts/run-audit.sh) — `claude -p` with the prompt in [`scripts/audit-prompt.md`](scripts/audit-prompt.md), `--model sonnet`, capped at `--max-budget-usd 1`.
-- **Schedule:** [`scripts/com.sergi.ai-os-audit.plist`](scripts/com.sergi.ai-os-audit.plist) (install/uninstall commands are in the plist header).
+- **Schedule:** [`scripts/com.sergi.sr-os-audit.plist`](scripts/com.sergi.sr-os-audit.plist) (install/uninstall commands are in the plist header).
 - **Why local, not a cloud cron:** a remote agent can't see local memory, chats, or MCP usage. This job runs on the Mac, so it can.
 
-Run it by hand any time: `bash scripts/run-audit.sh`. Test the schedule now: `launchctl kickstart -k gui/$(id -u)/com.sergi.ai-os-audit`.
+Run it by hand any time: `bash scripts/run-audit.sh`. Test the schedule now: `launchctl kickstart -k gui/$(id -u)/com.sergi.sr-os-audit`.

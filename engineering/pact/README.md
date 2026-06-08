@@ -1,6 +1,6 @@
 # PACT framework
 
-> Now the engineering layer of the AI OS — it lives at `engineering/pact/` inside `~/GitHub/ai-os`. To install it into a project, point Claude at this subfolder (not the repo root): the `git clone` / path references below still say `sr-pipeline` at root and want updating.
+> Now the engineering layer of the AI OS — it lives at `engineering/pact/` inside `~/GitHub/sr-os`. To install it into a project, point Claude at this subfolder (not the repo root): the `git clone` / path references below still say `sr-pipeline` at root and want updating.
 
 A portable [Claude Code](https://claude.com/claude-code) framework: a complete set of agents, hooks, rules, and conventions for building software with AI assistance — extracted from real, shipped projects and parametrised so any project can adopt it.
 

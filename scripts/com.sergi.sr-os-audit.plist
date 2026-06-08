@@ -5,25 +5,25 @@
   Runs every Monday at 08:00 local time.
 
   Install:
-    cp ~/GitHub/ai-os/scripts/com.sergi.ai-os-audit.plist ~/Library/LaunchAgents/
-    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.sergi.ai-os-audit.plist
+    cp ~/GitHub/sr-os/scripts/com.sergi.sr-os-audit.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.sergi.sr-os-audit.plist
 
   Run once now (test):
-    launchctl kickstart -k gui/$(id -u)/com.sergi.ai-os-audit
+    launchctl kickstart -k gui/$(id -u)/com.sergi.sr-os-audit
 
   Uninstall:
-    launchctl bootout gui/$(id -u)/com.sergi.ai-os-audit
-    rm ~/Library/LaunchAgents/com.sergi.ai-os-audit.plist
+    launchctl bootout gui/$(id -u)/com.sergi.sr-os-audit
+    rm ~/Library/LaunchAgents/com.sergi.sr-os-audit.plist
 -->
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.sergi.ai-os-audit</string>
+    <string>com.sergi.sr-os-audit</string>
 
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>/Users/sergireina/GitHub/ai-os/scripts/run-audit.sh</string>
+        <string>/Users/sergireina/GitHub/sr-os/scripts/run-audit.sh</string>
     </array>
 
     <key>StartCalendarInterval</key>
@@ -48,8 +48,8 @@
     <false/>
 
     <key>StandardOutPath</key>
-    <string>/Users/sergireina/GitHub/ai-os/audits/.launchd.out.log</string>
+    <string>/Users/sergireina/GitHub/sr-os/audits/.launchd.out.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/sergireina/GitHub/ai-os/audits/.launchd.err.log</string>
+    <string>/Users/sergireina/GitHub/sr-os/audits/.launchd.err.log</string>
 </dict>
 </plist>
