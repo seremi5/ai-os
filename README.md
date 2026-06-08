@@ -48,9 +48,9 @@ git clone https://github.com/seremi5/ai-os /tmp/ai-os
 claude "install the framework from /tmp/ai-os/engineering/pact into this project"
 ```
 
-**Making the OS govern *every* session** — add one routing line to the global `~/.claude/CLAUDE.md` so it points here for product/startup/writing work. (Editing the global config needs your explicit OK — see Status.)
+**Making the OS govern *every* session** — done: the global `~/.claude/CLAUDE.md` routes here for product/startup/writing work, so the voice and domain apply in every session, not only this repo.
 
-**Running the loop** — once a week the audit runs (see [`automations.md`](automations.md)); you approve 2–3 changes, reject 1–2, move on. Skip it and the OS rots.
+**Running the loop** — the audit runs itself every Monday 08:00 (see [`automations.md`](automations.md)) and writes `audits/<week>.md`; you approve 2–3 changes, reject 1–2, move on. Skip it and the OS rots.
 
 ---
 
@@ -81,7 +81,7 @@ ai-os/                       # the repo (was sr-pipeline / ai-forge)
 
 - ✅ Renamed `sr-pipeline → ai-os` (folder + GitHub `seremi5/ai-os`; old name redirects).
 - ✅ PACT framework merged in as the engineering layer (`engineering/pact/`); nothing lost.
-- ⏳ Route the global `~/.claude/CLAUDE.md` into this OS — **needs your explicit OK** (it's the agent's own startup config).
-- ⏳ Fully-auto weekly audit (background job) — being wired; see [`automations.md`](automations.md).
+- ✅ Global `~/.claude/CLAUDE.md` routes here for product/startup/writing work.
+- ✅ Weekly OS Audit is fully automatic — a macOS LaunchAgent runs headless `claude` every Monday 08:00 → `audits/<week>.md` + a notification. See [`automations.md`](automations.md).
 - ⚠️ Set the quarter's outcome metric in [`context/strategy.md`](context/strategy.md) — only you can.
 - ℹ️ PACT's own install docs (`engineering/pact/INSTALL.md`) still say "clone sr-pipeline" at root — update them to point at `engineering/pact/` when convenient.
