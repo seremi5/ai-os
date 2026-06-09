@@ -1,29 +1,27 @@
 # SR-OS
 
-> SR Operating System — a portable layer of context, memory, skills, automations, and a weekly audit that makes any AI work like me, across everything I build.
+> SR Operating System — a reusable setup that gives any AI assistant the context, tools, memory, and routines to do the work properly, without being re-briefed every time.
 
-Not a better model. A better setup. Five layers the agent reads so it knows who I am, what it can reach, what to reuse, what runs without me, and what to remember. One loop keeps it from rotting.
+Without a setup like this, you re-explain yourself to the AI every session: who you are, what you're building, how you like things done. SR-OS writes that down once — five layers the assistant reads at the start of every task — and a weekly check keeps them current.
 
-> **This is not an AI problem. It's an operating-model problem.** — adapted from the CraftMatters AI-OS masterclass (Ines Lourenço, 2026).
+## What it does
 
-## What it does for me
-
-- **Every session sounds like me.** The global `~/.claude/CLAUDE.md` routes here, so my voice, domain, and rules apply everywhere — not only in this repo.
-- **It audits itself weekly.** A Monday-morning job checks all five layers and proposes fixes, so the setup never rots.
-- **It builds software through [AItelier](engineering/aitelier/)** — its engineering layer, a composable framework I set up per project (see *Building software*).
+- **Starts every task already in context.** The assistant applies the right voice, domain knowledge, and house rules automatically — no re-briefing. It's wired globally, so this holds in any session, not only inside this repo.
+- **Keeps itself current — the weekly loop.** Every Monday a background job reviews all five layers and proposes a short list of changes: context that's gone stale, tools you've stopped using, prompts you've typed often enough to save as a reusable shortcut, automations producing noise you ignore, and memories that contradict each other. You approve a few and reject a few — about ten minutes. Without it, the setup quietly rots. (The exact checklist lives in [`audit.md`](audit.md).)
+- **Builds software through [AItelier](engineering/aitelier/)** — its engineering layer, a composable framework you set up per project (see *Building software*).
 
 ---
 
 ## The five layers + one loop
 
-| Layer | Purpose | File |
-|-------|---------|------|
-| **L1 · Context** | What the agent reads first | [`CLAUDE.md`](CLAUDE.md) (router) + [`context/`](context/) |
-| **L2 · Connections** | Reach beyond the workspace | [`connections.md`](connections.md) |
-| **L3 · Skills** | Prompts I reuse, not retype | [`skills/`](skills/) |
-| **L4 · Automations** | Work that runs while I sleep | [`automations.md`](automations.md) |
-| **L5 · Memory** | What survives every conversation | [`memory.md`](memory.md) → `~/.claude/.../memory/` |
-| **The loop** | Weekly OS Audit — the keystone | [`audit.md`](audit.md) |
+| Layer | What it is | File |
+|-------|-----------|------|
+| **L1 · Context** | Who I am, my domain, and the rules — read first, every task | [`CLAUDE.md`](CLAUDE.md) (router) + [`context/`](context/) |
+| **L2 · Connections** | The tools and APIs it can reach — Gmail, Notion, Calendar, git | [`connections.md`](connections.md) |
+| **L3 · Skills** | Saved prompts you trigger by name instead of retyping | [`skills/`](skills/) |
+| **L4 · Automations** | Jobs that run on a schedule without me | [`automations.md`](automations.md) |
+| **L5 · Memory** | Facts it keeps between conversations | [`memory.md`](memory.md) → `~/.claude/.../memory/` |
+| **The loop** | The weekly check that keeps all five current | [`audit.md`](audit.md) |
 
 ---
 
@@ -54,11 +52,11 @@ Full guide, module menu, and the "make it a `/command`" shortcut: **[engineering
 
 ---
 
-## Running the OS itself
+## Running it day to day
 
-- **Open it:** `cd ~/GitHub/sr-os && claude` — `CLAUDE.md` loads first and routes to the right context before answering.
-- **It governs every session** through the global router (already wired).
-- **The loop runs itself** every Monday 08:00 → `audits/<week>.md` + a notification ([`automations.md`](automations.md)); you approve 2–3 changes, reject 1–2, move on. Skip it and the OS rots.
+- **Open it:** `cd ~/GitHub/sr-os && claude` — `CLAUDE.md` loads first and routes the assistant to the right context before it answers.
+- **Everywhere else:** nothing to do. The global `~/.claude/CLAUDE.md` points here, so the context applies in any project you open.
+- **The Monday loop is automatic** ([`automations.md`](automations.md)) — it writes `audits/<week>.md` and pings you. Open it, approve a few changes, reject a few. That ten minutes is what keeps the whole thing from rotting.
 
 ---
 
