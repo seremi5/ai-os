@@ -1,9 +1,8 @@
 # Engineering — how I build software with AI
 
-> **The engineering layer of the AI OS.** Three things live here, newest first:
+> **The engineering layer of the AI OS.** Two things live here:
 >
-> - **[`aitelier/`](aitelier/) — AItelier, the framework I build with. Start here.** Composable: at `/aitelier-init` you pick the modules a project needs — spine (phases) + agents + guardrails + power modules (memory, worktrees, lifecycle, gates, design-system). File-based, no app, no vendor.
-> - **[`pact/`](pact/) — PACT, AItelier's predecessor.** The fixed Prepare→Architect→Code→Test bundle AItelier grew from. Kept for lineage and projects still on it (e.g. Shoutit).
+> - **[`aitelier/`](aitelier/) — AItelier, the framework I build with. Start here.** Composable: at setup you pick the modules a project needs — spine (phases) + agents + guardrails + power modules (memory, worktrees, lifecycle, gates, design-system). File-based, no app, no vendor.
 > - **This folder (standards / patterns / template) — the ai-forge pipeline standards.** Python AI-pipeline conventions; reference when building a data/AI pipeline.
 
 Standards, patterns, and templates I use to build AI pipelines. Every project I ship follows these conventions — and any agent building a new pipeline in my style should start here.

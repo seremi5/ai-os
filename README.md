@@ -1,12 +1,16 @@
 # SR-OS
 
-> Sergi Reina's AI operating system. Formerly `ai-forge` / `sr-pipeline` / `ai-os`. Two things merged here: the personal operating system (the five layers below) and the **PACT** framework, which is now the OS's engineering layer ([`engineering/pact/`](engineering/pact/)).
+> Sergi Reina's AI operating system — a portable layer of context, memory, skills, automations, and a weekly audit that makes any AI work like me, across everything I build.
 
-A personal operating model for working with AI. Not a better model — a better setup. Five layers the agent reads so it knows who I am, what it can reach, what to reuse, what runs without me, and what to remember. One loop keeps it from rotting.
-
-Built once. Portable across tools (Claude, Codex, Cursor, whatever's next). The system decays the moment the loop stops running.
+Not a better model. A better setup. Five layers the agent reads so it knows who I am, what it can reach, what to reuse, what runs without me, and what to remember. One loop keeps it from rotting.
 
 > **This is not an AI problem. It's an operating-model problem.** — adapted from the CraftMatters AI-OS masterclass (Ines Lourenço, 2026).
+
+## What it does for me
+
+- **Every session sounds like me.** The global `~/.claude/CLAUDE.md` routes here, so my voice, domain, and rules apply everywhere — not only in this repo.
+- **It audits itself weekly.** A Monday-morning job checks all five layers and proposes fixes, so the setup never rots.
+- **It builds software through [AItelier](engineering/aitelier/)** — its engineering layer, a composable framework I set up per project (see *Building software*).
 
 ---
 
@@ -21,37 +25,40 @@ Built once. Portable across tools (Claude, Codex, Cursor, whatever's next). The 
 | **L5 · Memory** | What survives every conversation | [`memory.md`](memory.md) → `~/.claude/.../memory/` |
 | **The loop** | Weekly OS Audit — the keystone | [`audit.md`](audit.md) |
 
-## The engineering layer
+---
 
-How I build software with AI, all in [`engineering/`](engineering/):
+## Building software — AItelier
 
-| | | |
-|---|---|---|
-| **AItelier** | The framework I build with — composable, file-based. Pick modules at `/aitelier-init`: phases, agents, guardrails, and power modules (memory, worktrees, lifecycle, gates, design-system). | [`engineering/aitelier/`](engineering/aitelier/) |
-| **PACT** | AItelier's predecessor — the fixed Prepare→Architect→Code→Test bundle. Kept for lineage and projects still on it. | [`engineering/pact/`](engineering/pact/) |
-| **Pipeline standards** | Python AI-pipeline conventions (the old ai-forge). | [`engineering/`](engineering/) |
+The engineering layer is **[AItelier](engineering/aitelier/)**: a composable framework you set up once per project. It asks what you need (stack, phases, agents, guardrails, power modules) and renders a project-local `.claude/`. Two ways in:
+
+**Start a brand-new project**
+
+```bash
+mkdir my-app && cd my-app && git init && claude
+```
+Then tell Claude:
+> *Set up AItelier in this project. Follow `~/GitHub/sr-os/engineering/aitelier/init/aitelier-init.md`.*
+
+It asks a few questions (preset, phases, agents, power modules), then scaffolds `aitelier.json` + `.claude/`. Restart Claude Code and describe your first task.
+
+**Add it to an existing project**
+
+```bash
+cd ~/code/my-existing-app && claude
+```
+Then tell Claude the same line. It **auto-detects** your stack and build/test/lint commands, proposes a fitting module set, and sets up **without touching your code** (it backs up any existing `.claude/`). Restart Claude Code and carry on.
+
+Full guide, module menu, and the "make it a `/command`" shortcut: **[engineering/aitelier/README.md](engineering/aitelier/README.md)**.
+
+> The engineering folder also keeps the older **ai-forge** Python AI-pipeline standards (`standards/`, `patterns/`, `template/`) — reference material for building data/AI pipelines.
 
 ---
 
-## How to use it
+## Running the OS itself
 
-**Working *in* the OS** — open this repo in Claude Code. `CLAUDE.md` loads first and routes the agent to the right context file before it answers anything.
-
-```bash
-cd ~/GitHub/sr-os
-claude
-```
-
-**Installing PACT into a project** — point Claude at the PACT subfolder:
-
-```bash
-git clone https://github.com/seremi5/sr-os /tmp/sr-os
-claude "install the framework from /tmp/sr-os/engineering/pact into this project"
-```
-
-**Making the OS govern *every* session** — done: the global `~/.claude/CLAUDE.md` routes here for product/startup/writing work, so the voice and domain apply in every session, not only this repo.
-
-**Running the loop** — the audit runs itself every Monday 08:00 (see [`automations.md`](automations.md)) and writes `audits/<week>.md`; you approve 2–3 changes, reject 1–2, move on. Skip it and the OS rots.
+- **Open it:** `cd ~/GitHub/sr-os && claude` — `CLAUDE.md` loads first and routes to the right context before answering.
+- **It governs every session** through the global router (already wired).
+- **The loop runs itself** every Monday 08:00 → `audits/<week>.md` + a notification ([`automations.md`](automations.md)); you approve 2–3 changes, reject 1–2, move on. Skip it and the OS rots.
 
 ---
 
@@ -70,7 +77,7 @@ sr-os/                       # the repo (was sr-pipeline / ai-forge)
 ├── audits/                  # dated audit outputs (YYYY-Www.md)
 └── engineering/             # how I build software with AI
     ├── README.md            #   index for this layer
-    ├── pact/                #   the PACT framework (agents, hooks, rules, templates)
+    ├── aitelier/            #   AItelier — the composable framework
     ├── standards/           #   ai-forge: agent contract, config
     ├── patterns/            #   ai-forge: pipeline, debate
     └── template/            #   ai-forge: Python starter
@@ -81,8 +88,7 @@ sr-os/                       # the repo (was sr-pipeline / ai-forge)
 ## Status
 
 - ✅ Renamed `sr-pipeline → sr-os` (folder + GitHub `seremi5/sr-os`; old name redirects).
-- ✅ PACT framework merged in as the engineering layer (`engineering/pact/`); nothing lost.
+- ✅ **AItelier** is the engineering layer — composable, file-based ([`engineering/aitelier/`](engineering/aitelier/)).
 - ✅ Global `~/.claude/CLAUDE.md` routes here for product/startup/writing work.
-- ✅ Weekly OS Audit is fully automatic — a macOS LaunchAgent runs headless `claude` every Monday 08:00 → `audits/<week>.md` + a notification. See [`automations.md`](automations.md).
+- ✅ Weekly OS Audit is fully automatic — a macOS LaunchAgent runs headless `claude` every Monday 08:00 → `audits/<week>.md` + a notification.
 - ⚠️ Set the quarter's outcome metric in [`context/strategy.md`](context/strategy.md) — only you can.
-- ℹ️ PACT's own install docs (`engineering/pact/INSTALL.md`) still say "clone sr-pipeline" at root — update them to point at `engineering/pact/` when convenient.

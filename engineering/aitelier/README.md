@@ -4,11 +4,11 @@
 
 A composable, file-based framework for AI-assisted software development. You don't install a fixed bundle — you **pick the modules a project needs** at setup, and AItelier assembles a project-local `.claude/` from them, parametrised by one `aitelier.json`.
 
-It grew out of [PACT](../pact/) (the Prepare→Architect→Code→Test methodology) and adds the capabilities a serious build wants — typed project memory, per-task worktrees, a backlog→release lifecycle, approval gates — while staying **yours**: plain markdown and shell, no desktop app, no vendor, no telemetry, no network. Same ethos as SR-OS and Shoutit.
+It pairs a proven phase methodology (Prepare→Architect→Code→Test, generalised) with the capabilities a serious build wants — typed project memory, per-task worktrees, a backlog→release lifecycle, approval gates — while staying **yours**: plain markdown and shell, no desktop app, no vendor, no telemetry, no network. Same ethos as SR-OS and Shoutit.
 
 ## The idea in one line
 
-> PACT was all-or-nothing. AItelier is à la carte, file-based, and yours — pick only the parts a project needs.
+> Pick only the parts a project needs. À la carte, file-based, and yours — no app, no vendor, no lock-in.
 
 ---
 

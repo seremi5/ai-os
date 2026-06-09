@@ -6,7 +6,7 @@ The menu `/aitelier-init` picks from. Each row is a module under [`modules/`](mo
 
 | Module | Installs | Needs | Pick when |
 |--------|----------|-------|-----------|
-| **`workflow`** | `.claude/workflow.md` + selected `phases/*.md` | — | Always. The phase methodology (PACT, generalised): choose which phases apply. |
+| **`workflow`** | `.claude/workflow.md` + selected `phases/*.md` | — | Always. The phase methodology: choose which phases apply. |
 | **`project-profile`** | `aitelier.json` + `.claude/project-profile.md` | — | Always. The stack/commands/language/deploy config everything else reads. |
 
 **Phases are data.** Default set: `prepare → architect → code → test`. Add `design` (front of line, UI work), add `ship` (end, deploys). Drop `architect` for ≤2-file changes. Configured in `aitelier.json → workflow.phases`.
@@ -46,7 +46,7 @@ Toggle each hook and rule independently.
 
 ## Power — the optional muscle
 
-The new value over plain PACT — file-based and optional.
+The optional muscle — file-based, take what you need.
 
 | Module | Installs | Needs | Pick when |
 |--------|----------|-------|-----------|

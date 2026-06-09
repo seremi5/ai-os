@@ -12,7 +12,7 @@ corresponding gate is skipped.
 - **Wireframes created in Figma** — no ASCII art, always a Figma URL
 - User journey documented per section (why does this section exist?)
 - Existing design system component reuse identified vs custom components needed
-- Open questions listed before handing off to pact-architect
+- Open questions listed before handing off to architect
 
 ## Prepare Phase
 

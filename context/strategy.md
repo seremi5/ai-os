@@ -8,7 +8,7 @@
 
 ## Triple track
 
-1. **Execution — Portfolio OS (Shoutit).** Ship the first portfolio project. The Project Steward keeps `~/GitHub/startup/portfolio/shoutit.md` and Notion in sync; the actual coding runs in Shoutit's own PACT pipeline. Operator reviews Sun/Wed/Fri (~2h/week).
+1. **Execution — Portfolio OS (Shoutit).** Ship the first portfolio project. The Project Steward keeps `~/GitHub/startup/portfolio/shoutit.md` and Notion in sync; the actual coding runs in Shoutit's own internal pipeline. Operator reviews Sun/Wed/Fri (~2h/week).
 2. **Ideation — new ideas.** The weekly cycle in `~/GitHub/startup` keeps running. Ideas that survive the pipeline become portfolio candidates.
 3. **Content — daily LinkedIn.** Weekday routine drafts three post candidates in my voice; I review in Notion; posting is manual.
 

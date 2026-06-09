@@ -14,7 +14,7 @@ Full implementation detail lives in the files. It does not need to come back int
 ## Phase Boundaries
 
 - Run `/compact` between phases — do not wait for auto-compression
-- For long PACT cycles, start a fresh session at each phase boundary
+- For long cycles, start a fresh session at each phase boundary
 - The previous phase's output lives in `docs/` — point the next agent at those files with `@` references, do not summarise them into the conversation
 
 ## The @ Reference Pattern
@@ -28,6 +28,6 @@ The first uses zero tokens in the main context until the agent actually needs it
 ## Teams vs Single Session
 
 For long or parallel workstreams, Claude Code Teams gives each specialist its own fresh context window. Each instance reads from and writes to the shared task list without accumulating each other's context. Consider Teams when:
-- A single PACT cycle is consistently hitting context limits
+- A single cycle is consistently hitting context limits
 - Two features need to be developed simultaneously
 - Combined with worktrees for fully isolated parallel execution
