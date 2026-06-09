@@ -1,0 +1,11 @@
+id: design-system
+name: Design system
+group: power
+summary: Design tokens + Figma pointers so UI work reuses the system instead of reinventing it.
+installs:
+  - from: design-system-guide.md
+    to: .claude/design-system.md
+requires: [agents:designer]
+notes: >
+  UI projects only. Points the designer + frontend/mobile coders at the source of truth
+  for tokens and components, and enforces reuse-before-custom.

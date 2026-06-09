@@ -1,0 +1,16 @@
+id: lifecycle
+name: Backlog → task → release
+group: power
+summary: A plain-markdown board — backlog items become tasks become release notes. No app required.
+installs:
+  - from: lifecycle-guide.md
+    to: .aitelier/README.md
+  - creates: .aitelier/backlog/
+  - creates: .aitelier/tasks/
+  - creates: .aitelier/releases/
+  - from: templates/
+    to: .aitelier/.templates/
+requires: []
+notes: >
+  A backlog board as flat markdown you can read on GitHub. A task carries the
+  active phase from workflow.phases; gates (if installed) hang off task phase boundaries.

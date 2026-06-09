@@ -18,7 +18,7 @@ Sergi Reina-Miret — AI PM at OakNorth; lawyer turned fintech PM (ex-Monite, Ve
 | A prompt typed 3+ times; a reusable skill | [`skills/README.md`](skills/README.md) |
 | What runs on a schedule; adding an automation | [`automations.md`](automations.md) |
 | What the agent should remember across chats | [`memory.md`](memory.md) → `~/.claude/.../memory/` |
-| Building software with AI; the PACT workflow; code conventions | [`engineering/README.md`](engineering/README.md) → PACT in [`engineering/pact/`](engineering/pact/) |
+| Building software with AI; the AItelier framework; code conventions | [`engineering/README.md`](engineering/README.md) → [`engineering/aitelier/`](engineering/aitelier/) |
 | The weekly health check of this OS | [`audit.md`](audit.md) |
 
 ## Always-on rules

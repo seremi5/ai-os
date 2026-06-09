@@ -1,0 +1,14 @@
+id: hooks
+name: Guardrail hooks
+group: guardrails
+summary: Automatic shell guardrails. Each is independently toggleable; wired in .claude/settings.json at render.
+installs_each:
+  protect-secrets:   { file: protect-sensitive.sh, event: PreToolUse,  summary: "Block edits/commits that touch .env or secrets" }
+  lint-after-edit:   { file: post-edit.sh,         event: PostToolUse, summary: "Run project lint after a file edit (reads aitelier.json)" }
+  typecheck-on-done: { file: end-of-turn.sh,       event: Stop,        summary: "Typecheck before claiming done (reads aitelier.json)" }
+requires: []
+reads: [aitelier.json]         # lint/typecheck commands come from project.commands; empty string = skip
+needs_tools: [jq]
+notes: >
+  At init, the render step writes .claude/settings.json wiring the chosen hooks to their events.
+  A hook whose command is empty in aitelier.json exits silently — install it freely.

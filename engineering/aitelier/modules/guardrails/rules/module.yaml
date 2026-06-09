@@ -1,0 +1,13 @@
+id: rules
+name: Conventions & gates
+group: guardrails
+summary: Codified rules every agent reads. Toggle each; conventions.md is rendered from aitelier.json.
+installs_each:
+  quality-gates:        { file: quality-gates.md,        summary: "Per-phase pass/fail gates (build/test/lint/typecheck from the manifest)" }
+  async-questions:      { file: async-questions.md,      summary: "Queue ambiguities, keep working; block only on the dangerous ones" }
+  context-management:   { file: context-management.md,   summary: "Sub-agent return format, @-references, compaction at phase boundaries" }
+  full-stack-awareness: { file: full-stack-awareness.md, summary: "Cross-layer impact checklist (BE/FE/DB/mobile)" }
+  deployment-checklist: { file: deployment-checklist.md, summary: "Staging-first deploy flow (only if project.deploy is set)" }
+  conventions:          { file: conventions.md,          summary: "Stack conventions — language, deps, style; RENDERED from aitelier.json", rendered: true }
+requires: []
+reads: [aitelier.json]

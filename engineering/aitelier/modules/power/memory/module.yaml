@@ -1,0 +1,13 @@
+id: memory
+name: Typed project memory
+group: power
+summary: Per-project memory that survives sessions — decisions, mistakes, facts, preferences, workflows. Approve before save.
+installs:
+  - from: templates/
+    to: .claude/memory/
+  - from: memory-guide.md
+    to: .claude/memory/README.md
+requires: []
+notes: >
+  Run on SR-OS's memory discipline: type every entry, write the WHY,
+  approve before saving, prune contradictions. Read at the start of every task.

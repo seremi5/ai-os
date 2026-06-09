@@ -1,0 +1,14 @@
+id: worktrees
+name: Per-task git worktrees
+group: power
+summary: Isolate each task in its own git worktree + branch, with sync-from-base helpers.
+installs:
+  - from: scripts/
+    to: .claude/scripts/
+  - from: worktree-guide.md
+    to: .claude/scripts/worktrees.md
+requires: []
+reads: [aitelier.json]          # base branch from project.deploy or git default
+notes: >
+  Worktrees live under .aitelier-worktrees/<task>. Each task is a branch feature/<task>.
+  Keeps parallel tasks from colliding and keeps main clean.

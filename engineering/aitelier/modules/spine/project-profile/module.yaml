@@ -1,0 +1,10 @@
+id: project-profile
+name: Project profile
+group: spine
+summary: The aitelier.json manifest + a human-readable codebase profile every agent reads first.
+installs:
+  - from: project-profile.md
+    to: .claude/project-profile.md
+  - generates: aitelier.json        # at project root, by the init wizard
+requires: []
+reads: [aitelier.json]

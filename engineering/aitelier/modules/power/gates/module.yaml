@@ -1,0 +1,12 @@
+id: gates
+name: Approval gates + manual-test checklists
+group: power
+summary: A human sign-off at each phase boundary, with a manual-test checklist to review against.
+installs:
+  - from: gates-guide.md
+    to: .claude/gates.md
+requires: [lifecycle]            # gates hang off task phase boundaries
+reads: [aitelier.json]           # iterates workflow.phases
+notes: >
+  Turns the workflow human-in-the-loop: the orchestrator stops at each phase boundary,
+  posts what changed + how to test it, and waits for the builder before the next phase.

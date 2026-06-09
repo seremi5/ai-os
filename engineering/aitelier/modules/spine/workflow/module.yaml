@@ -1,0 +1,13 @@
+id: workflow
+name: Workflow (phases as data)
+group: spine
+summary: The phase methodology — Prepare→Architect→Code→Test, generalised. Phases are a configurable list.
+installs:
+  - from: workflow.md
+    to: .claude/workflow.md
+  - from: phases/        # only the phases in aitelier.json → workflow.phases
+    to: .claude/phases/
+  - from: prd-template.md
+    to: .claude/templates/prd-template.md
+requires: []
+reads: [aitelier.json]   # workflow.phases drives the active set

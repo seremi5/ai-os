@@ -23,12 +23,13 @@ Built once. Portable across tools (Claude, Codex, Cursor, whatever's next). The 
 
 ## The engineering layer
 
-How I build software with AI. Two toolkits, both in [`engineering/`](engineering/):
+How I build software with AI, all in [`engineering/`](engineering/):
 
 | | | |
 |---|---|---|
-| **PACT** | Portable Claude Code framework — 7 agents (Prepare→Architect→Code→Test), hooks, rules, templates. Installs into any project. | [`engineering/pact/`](engineering/pact/) |
-| **Pipeline standards** | Python AI-pipeline conventions: agent contract, debate pattern, config, starter template (the old ai-forge). | [`engineering/`](engineering/) |
+| **AItelier** | The framework I build with — composable, file-based. Pick modules at `/aitelier-init`: phases, agents, guardrails, and power modules (memory, worktrees, lifecycle, gates, design-system). | [`engineering/aitelier/`](engineering/aitelier/) |
+| **PACT** | AItelier's predecessor — the fixed Prepare→Architect→Code→Test bundle. Kept for lineage and projects still on it. | [`engineering/pact/`](engineering/pact/) |
+| **Pipeline standards** | Python AI-pipeline conventions (the old ai-forge). | [`engineering/`](engineering/) |
 
 ---
 

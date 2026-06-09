@@ -1,0 +1,19 @@
+id: agents
+name: Agent roster
+group: agents
+summary: Specialist sub-agents. Install only the ones a project's stack needs (group:id).
+installs_each:                 # each sub-id installs one file → .claude/agents/<id>.md
+  preparer:          { file: preparer.md,          role: "Research docs/APIs before building" }
+  architect:         { file: architect.md,         role: "System design across modules" }
+  designer:          { file: designer.md,          role: "Figma wireframes + HIG/UX" }
+  backend-coder:     { file: backend-coder.md,     role: "Server/API/Core implementation" }
+  frontend-coder:    { file: frontend-coder.md,    role: "UI implementation" }
+  mobile-coder:      { file: mobile-coder.md,      role: "iOS/Android + extensions" }
+  database-engineer: { file: database-engineer.md, role: "Schema, migrations, queries" }
+  test-engineer:     { file: test-engineer.md,     role: "Test suite per phase" }
+  reviewer:          { file: reviewer.md,          role: "Adversarial review of a diff" }
+requires: []
+reads: [aitelier.json]         # agents inherit language + commands from the manifest
+notes: >
+  Agents are stack-agnostic: their prompts say "follow the conventions in CLAUDE.md",
+  never a concrete framework. Stack details come from aitelier.json at render time.
